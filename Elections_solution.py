@@ -1,10 +1,11 @@
 # Dependencies
 import os
 import csv
+import sys
 # CSV read path location
-csvpath = os.path.join('c:/data1','houston_election_data.csv')
+csvpath = os.path.join(sys.path[0] ,'data/houston_election_data.csv')
 # Output path location
-file2 = open("Output/Election_Results.txt","w") 
+file2 = open("Election_Results.txt","w") 
 #Reading the csv file using CSV module
 with open(csvpath,encoding='UTF-8') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -33,7 +34,7 @@ with open(csvpath,encoding='UTF-8') as csvfile:
         elif value > top_2 and value < top_1:
             top_2 = value
             name_2 = name
-        percentage_votes = value/count_votes*100
+        percentage_votes = str('{0:.2%}'.format(value/count_votes))
         print(" {} {}% {}".format(name,percentage_votes,value))
         
         file2.write(" {} {}% {}\n".format(name,percentage_votes,value))
